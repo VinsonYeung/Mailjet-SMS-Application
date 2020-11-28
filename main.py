@@ -4,10 +4,12 @@ from tkinter import filedialog
 
 
 if __name__ == "__main__":
+    # List of .csv entries separated into sections
     contact_info = []
     root = Tk()
     root.title("Send SMS")
     root.geometry("640x400")
+    root.minsize(400, 200)
 
     # Top frame
     topFrame = Frame(root)
@@ -63,6 +65,7 @@ if __name__ == "__main__":
     def send_messages():
         successful_sends = 0
         failed_sends = 0
+        # Count of sent messages
         message_count = 0
         messages = contactDisplay.get(0, END)
         # Write .csv of status codes
@@ -79,7 +82,7 @@ if __name__ == "__main__":
             }
 
             response = requests.request("POST", url, headers=headers, data=payload)
-            # Count failed sends
+            # Count failed and successful sends
             if response.ok:
                 successful_sends += 1
             else:
